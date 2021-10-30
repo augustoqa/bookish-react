@@ -1,26 +1,20 @@
 import Typography from '@material-ui/core/Typography'
+import BookList from './BookList';
 
 function App() {
-  const books = [{name: 'Refactoring'}, {name: 'Domain-driven design'}]
+  const books = [
+    {name: 'Refactoring'}, 
+    {name: 'Domain-driven design'}
+  ]
 
   return (
     <div>
       <Typography variant='h2' component='h2' data-test='heading'>
         Bookish
       </Typography>
-      {renderBooks(books)}
+      <BookList books={books} />
     </div>
   );
-}
-
-const renderBooks = (books) => {
-  return <div data-test='book-list'>
-  {
-    books.map(book => (<div className='book-item'>
-      <h2 className='title'>{book.name}</h2>
-    </div>))
-  }
-  </div>
 }
 
 export default App;
