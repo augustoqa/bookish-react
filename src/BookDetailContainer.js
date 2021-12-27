@@ -1,18 +1,15 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useRemoteService } from './hooks';
 
 const BookDetailContainer = ({ match }) => {
-  const [id, _] = useState(match.params.id);
-  const [book, setBook] = useState({});
-  useEffect(() => {
-    const fetchBook = async () => {
-      const book = await axios.get(`http://localhost:8080/books/${id}`);
-      setBook(book.data);
-    };
-    fetchBook();
-  }, [id]);
-
-  return <h2 className='book-title'>{book.name}</h2>;
+  const { data } = useRemoteService(
+    `http://localhost:8080/books/${match.params.id}`,
+    {}
+  );
+  return (
+    <div className='detail'>
+      <h2 className='book-title'>{data.name}</h2>
+    </div>
+  );
 };
 
 export default BookDetailContainer;
